@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  bridge:
+      container_name: bridge
+      image: "sysrex/bridge1:v0.4.2"
+      ports:
+        - "2121:2121"
+        - "6000:6000"
+        - "26658:26658"
+      environment:
+        - NODE_TYPE=bridge
+        - CELESTIA_CUSTOM=arabica-1:FAAA4B939173B4F8567E812FDC570FF186355326879017A611C58267A5D6EF17
+      command: [
+              "celestia", "bridge",
+              "--node.store", "/root/.celestia-bridge",
+              "start",
+              "--core.ip",
+              "34.77.147.236"
+              ]
+      volumes:
+        - /opt/validator1/data/bridge:/root:rw
+      networks:
+        celestia:
+          ipv4_address: 172.27.10.10
