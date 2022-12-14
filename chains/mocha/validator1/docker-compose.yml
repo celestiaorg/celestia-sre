@@ -1,0 +1,55 @@
+version: '3.3'
+
+networks:
+  celestia:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.27.10.0/24
+
+services:
+  validator1:
+    container_name: validator
+    image: sysrex/validator:v0.7.1
+    ports:
+      - "1317:1317"
+      - "9090:9090"
+      - "26656:26656"
+      - "26657:26657"
+    command: [
+      "start",
+      "--moniker", "validator1",
+      "--rpc.laddr", "tcp://0.0.0.0:26657"
+    ]
+    volumes:
+      - ${PWD}/config/validator1/config/priv_validator_key.json:/opt/config/priv_validator_key.json:ro
+      - ${PWD}/config/validator1/config/node_key.json:/opt/config/node_key.json:ro
+      - ${PWD}/config/validator1/keyring-test:/opt/keyring-test:ro
+      - ${PWD}/config/config.toml:/opt/config/config.toml:ro
+      - ${PWD}/config/genesis.json:/opt/config/genesis.json:ro
+      - /opt/validator1/data/app:/opt/data:rw
+    networks:
+      celestia:
+        ipv4_address: 172.27.10.9
+  bridge:
+    container_name: bridge
+    image: "sysrex/bridge1:v0.4.2"
+    ports:
+      - "2121:2121"
+      - "6000:6000"
+      - "26658:26658"
+    environment:
+      - NODE_TYPE=bridge
+      - CELESTIA_CUSTOM=arabica-1:FAAA4B939173B4F8567E812FDC570FF186355326879017A611C58267A5D6EF17
+    command: [
+            "celestia", "bridge",
+            "--node.store", "/root/.celestia-bridge",
+            "start",
+            "--core.ip",
+            "34.77.147.236"
+             ]
+    volumes:
+       - /opt/validator1/data/bridge:/root:rw
+    networks:
+      celestia:
+        ipv4_address: 172.27.10.10

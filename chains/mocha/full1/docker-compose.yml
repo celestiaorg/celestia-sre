@@ -1,0 +1,33 @@
+version: "3.3"
+
+networks:
+  celestia:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.27.10.0/24
+
+services:
+  full:
+      container_name: full
+      image: "sysrex/bridge1:v0.4.2"
+      ports:
+        - "2121:2121"
+        - "6000:6000"
+        - "26658:26658"
+      environment:
+        - NODE_TYPE=full
+      command: [
+              "celestia", "full",
+              "--node.store", "/root/.celestia-full",
+              "start",
+              "--headers.trusted-hash",
+              "FAAA4B939173B4F8567E812FDC570FF186355326879017A611C58267A5D6EF17",
+              "--headers.trusted-peers",
+              "/ip4/34.77.147.236/tcp/2121/p2p/12D3KooWNpRWxpi1APzV6CnwHvdgNRuTUbMNvg4ta2i1fnqYXR7H"
+               ]
+      volumes:
+        - /opt/validator2/data/full:/root:rw
+      networks:
+        celestia:
+          ipv4_address: 172.27.10.11
