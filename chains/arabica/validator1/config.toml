@@ -1,0 +1,39 @@
+[Core]
+  IP = "172.27.10.9"
+  RPCPort = "26657"
+  GRPCPort = ""
+
+[Key]
+  KeyringAccName = ""
+
+[P2P]
+  ListenAddresses = ["/ip4/0.0.0.0/udp/2121/quic", "/ip6/::/udp/2121/quic", "/ip4/0.0.0.0/tcp/2121", "/ip6/::/tcp/2121"]
+  AnnounceAddresses = []
+  NoAnnounceAddresses = ["/ip4/0.0.0.0/udp/2121/quic", "/ip4/127.0.0.1/tcp/2121/quic", "/ip6/::/udp/2121/quic", "/ip4/0.0.0.0/tcp/2121", "/ip4/127.0.0.1/tcp/2121", "/ip6/::/tcp/2121"]
+  Bootstrapper = true
+  MutualPeers = ["/dns4/marsellesa.celestia-devops.dev/tcp/2121/p2p/12D3KooWHr2wqFAsMXnPzpFsgxmePgXb8BqpkePebwUgLyZc95bd", "/dns4/parainem.celestia-devops.dev/tcp/2121/p2p/12D3KooWHX8xpwg8qkP7kLKmKGtgZvmsopvgxc6Fwtu665QC7G8q"]
+  PeerExchange = true
+  RoutingTableRefreshPeriod = 60000000000
+  [P2P.ConnManager]
+    Low = 50
+    High = 100
+    GracePeriod = 60000000000
+
+[RPC]
+  Address = "0.0.0.0"
+  Port = "26658"
+
+[Share]
+  PeersLimit = 3
+  DiscoveryInterval = "30s"
+  AdvertiseInterval = "30s"
+
+[Header]
+  TrustedHash = ""
+  TrustedPeers = []
+[DASer]
+  SamplingRange = 100
+  ConcurrencyLimit = 16
+  BackgroundStoreInterval = "10m0s"
+  PriorityQueueSize = 64
+  SampleFrom = 1

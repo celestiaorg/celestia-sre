@@ -8,7 +8,7 @@ networks:
         - subnet: 172.27.10.0/24
 
 services:
-  validator1:
+  validator2:
     container_name: validator
     image: sysrex/validator:v0.11.0
     ports:
@@ -22,8 +22,8 @@ services:
       "--rpc.laddr", "tcp://0.0.0.0:26657"
     ]
     volumes:
-      - /opt/validator1/config:/opt/config:rw
-      - /opt/validator1/data/app:/opt/data:rw
+      - /opt/validator2/config:/opt/config:rw
+      - /opt/validator2/data/app:/opt/data:rw
     networks:
       celestia:
         ipv4_address: 172.27.10.9
@@ -48,9 +48,9 @@ services:
             "26657"
              ]
     volumes:
-       - /opt/validator1/data/bridge:/root:rw
+       - /opt/validator2/data/bridge:/root:rw
     depends_on:
-      - validator1
+      - validator2
     networks:
       celestia:
         ipv4_address: 172.27.10.10

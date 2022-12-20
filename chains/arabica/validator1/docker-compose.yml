@@ -10,7 +10,7 @@ networks:
 services:
   validator1:
     container_name: validator
-    image: sysrex/validator:v0.7.1
+    image: ghcr.io/celestiaorg/celestia-app:v0.10.0-rc1
     ports:
       - "1317:1317"
       - "9090:9090"
@@ -33,14 +33,14 @@ services:
         ipv4_address: 172.27.10.9
   bridge:
     container_name: bridge
-    image: "sysrex/bridge1:v0.4.2"
+    image: sysrex/bridge1:v0.5.0-rc5
     ports:
       - "2121:2121"
       - "6000:6000"
       - "26658:26658"
     environment:
       - NODE_TYPE=bridge
-      - CELESTIA_CUSTOM=arabica-1:FAAA4B939173B4F8567E812FDC570FF186355326879017A611C58267A5D6EF17
+      - CELESTIA_CUSTOM=arabica-2:04EE55B212745B88F29943D7B9528C415473A211F12EEF6E9333EF32E4DEAF3C
     command: [
             "celestia", "bridge",
             "--node.store", "/root/.celestia-bridge",

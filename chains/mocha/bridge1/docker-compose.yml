@@ -2,7 +2,7 @@ version: '3.3'
 services:
   bridge:
       container_name: bridge
-      image: "sysrex/bridge1:v0.4.2"
+      image: "sysrex/boostrapper:latest"
       ports:
         - "2121:2121"
         - "6000:6000"

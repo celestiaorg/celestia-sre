@@ -10,7 +10,8 @@ networks:
 services:
   full:
       container_name: full
-      image: "sysrex/bridge1:v0.4.2"
+      image: sysrex/celestia-node:v0.6.1
+      restart: always
       ports:
         - "2121:2121"
         - "6000:6000"
@@ -22,9 +23,11 @@ services:
               "--node.store", "/root/.celestia-full",
               "start",
               "--headers.trusted-hash",
-              "FAAA4B939173B4F8567E812FDC570FF186355326879017A611C58267A5D6EF17",
+              "04EE55B212745B88F29943D7B9528C415473A211F12EEF6E9333EF32E4DEAF3C",
               "--headers.trusted-peers",
-              "/ip4/34.77.147.236/tcp/2121/p2p/12D3KooWNpRWxpi1APzV6CnwHvdgNRuTUbMNvg4ta2i1fnqYXR7H"
+              "/ip4/34.77.147.236/tcp/2121/p2p/12D3KooWNpRWxpi1APzV6CnwHvdgNRuTUbMNvg4ta2i1fnqYXR7H",
+              "--p2p.network",
+              "arabica"
                ]
       volumes:
         - /opt/validator3/data/full:/root:rw
